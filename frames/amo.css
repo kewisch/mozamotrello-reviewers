@@ -1,0 +1,24 @@
+.addon {
+  margin-bottom: 0.5em;
+}
+
+.addon > .name {
+  font-size: 1.1em;
+}
+
+.addon > .img {
+  vertical-align: text-top;
+}
+
+#loading:not(.loading) {
+  display: none;
+}
+
+#loading {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.dash:not(:empty)::after {
+  content: " – ";
+}
