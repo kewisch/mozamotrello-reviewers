@@ -21,21 +21,37 @@ t.render(async () => {
   document.querySelector("#content").innerHTML = "";
   document.querySelector("#loading").classList.add("loading");
 
-  let info = slugs.map((slug) => fetch(API_PREFIX + slug).then(resp => resp.json()));
+  let info = slugs.map((slug) => fetch(API_PREFIX + slug).then(async (resp) => {
+    let data = await resp.json();
+    if (!data.url) {
+      let parts = resp.url.split("/");
+      data.slug = parts[parts.length - 1] || parts[parts.length - 2];
+      data.url = "https://addons.mozilla.org/en-US/firefox/addon/" + data.slug;
+      data.review_url = "https://reviewers.addons.mozilla.org/en-US/reviewers/review/" + data.slug;
+    }
+    return data;
+  }));
 
   let results = await Promise.all(info);
   document.querySelector("#loading").classList.remove("loading");
 
   for (let addon of results) {
-    let template = document.querySelector("#addon");
-    let clone = document.importNode(template.content, true);
+    try {
+      console.log(addon);
+      let template = document.querySelector("#addon");
+      let clone = document.importNode(template.content, true);
 
-    clone.querySelector(".name").textContent = addon.name["en-US"] || addon.name[addon.default_locale] || "";
-    clone.querySelector(".img").src = addon.icon_url;
-    clone.querySelector(".url.listing").setAttribute("href", addon.url);
-    clone.querySelector(".url.review").setAttribute("href", addon.review_url);
+      let name = addon.name ? addon.name["en-US"] || addon.name[addon.default_locale] || "unknown" : addon.slug;
 
-    document.querySelector("#content").appendChild(clone);
+      clone.querySelector(".name").textContent = name;
+      clone.querySelector(".img").src = addon.icon_url || "../images/addon.png";
+      clone.querySelector(".url.listing").setAttribute("href", addon.url);
+      clone.querySelector(".url.review").setAttribute("href", addon.review_url || "");
+
+      document.querySelector("#content").appendChild(clone);
+    } catch (e) {
+      console.error(e, addon);
+    }
   }
 
   return t.sizeTo("#content");
