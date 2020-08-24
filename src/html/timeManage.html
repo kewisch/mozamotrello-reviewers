@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://p.trellocdn.com/power-up.min.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <script src="https://p.trellocdn.com/power-up.min.js"></script>
+</head>
+
+<body>
+    <div>
+        <table id="formInputTab">
+            <thead>
+                <th>Date</th>
+                <th>Time Spent</th>
+                <th>Member</th>
+                <th>Actions</th>
+            </thead>
+            <tbody>
+                <td>
+                    <input type="date" id="dateSpent" name="dateSpent"/>
+                </td>
+                <td>
+                    <input id="timeSpentToAdd" class="marginAuto" type="number" min=1 max=8>
+                </td>
+                <td>
+                    <select id="members" class="marginAuto">
+                        <option selected disabled>Choose a member</option>
+                    </select>
+                </td>
+                <td>
+                    <button class="mod-primary" id='insertValue'>Add</button>
+                </td>
+            </tbody>
+        </table>
+    </div>
+    <div class="container">
+        <div class="row m-2">
+            <div class="col-6 textAlignCenter">
+                <button class="mod-danger" id="closeModal">Close</button>
+            </div>
+            <div class="col-6 textAlignCenter">
+                <button class="mod-danger" id="resetData">Reset Time</button>
+            </div>
+        </div>
+
+        <div class="row m-2">
+            <div class="col-12 border">
+                <h2>
+                    Total Time Spent
+                </h2>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-12 border bold" id="totalTimeSpent">
+                No Total yet
+            </div>
+        </div>
+        <hr>
+        <div class="row m-2">
+            <div class="col-12 border">
+                <h2>
+                    Logs
+                </h2>
+            </div>
+        </div>
+        <div class="row m-2">
+            <div class="col-12 border" id="logTimeSpent">
+                <table>
+                    <thead>
+                        <th>
+                            Member
+                        </th>
+                        <th>
+                            Date
+                        </th>
+                        <th>
+                            Time Spent
+                        </th>
+                    </thead>
+                    <tbody id="bodyLogTimeSpent">
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../js/timeManage.js"></script>
+
+</body>
+
+</html>

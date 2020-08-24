@@ -1,0 +1,16 @@
+.textAlignCenter{
+    text-align: center;
+}
+
+.marginAuto{
+    margin: auto;
+}
+
+body{
+    padding: 20px;
+}
+
+#formInputTab{
+    text-align: center; 
+    vertical-align: middle;
+}

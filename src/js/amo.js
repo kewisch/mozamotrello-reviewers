@@ -44,7 +44,7 @@ t.render(async () => {
       let name = addon.name ? addon.name["en-US"] || addon.name[addon.default_locale] || "unknown" : addon.slug;
 
       clone.querySelector(".name").textContent = name;
-      clone.querySelector(".img").src = addon.icon_url || "../images/addon.png";
+      clone.querySelector(".img").src = addon.icon_url || "../src/images/addon.png";
       clone.querySelector(".url.listing").setAttribute("href", addon.url);
       clone.querySelector(".url.review").setAttribute("href", addon.review_url || "");
 
