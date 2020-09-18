@@ -1,5 +1,5 @@
 {
-  "name": "AMOTrelloTimeTrack",
+  "name": "mozamotrello-reviewers",
   "version": "0.1.0",
   "description": "Add time field and attach review link to card",
   "main": "index.js",

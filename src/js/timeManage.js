@@ -131,15 +131,16 @@ document.getElementById('insertValue').onclick = function () {
             updateDisplay();
             // t.closeModal();
         });
-    }else{
-        $.notify({
-            // options
-            message: 'Please fill up all information before adding' 
-        },{
-            // settings
-            type: 'danger'
-        });
     }
+    // else{
+    //     $.notify({
+    //         // options
+    //         message: 'Please fill up all information before adding' 
+    //     },{
+    //         // settings
+    //         type: 'danger'
+    //     });
+    // }
 }
 
 
