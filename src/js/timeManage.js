@@ -125,7 +125,6 @@ document.getElementById('insertValue').onclick = function () {
     var valTimeSpentToAdd = document.getElementById('timeSpentToAdd').value;
     var valDateSpent = document.getElementById('dateSpent').value;
     var valMember = $("#members").val();
-    console.log(valTimeSpentToAdd, valDateSpent, valMember);
     if(valTimeSpentToAdd !== "" && valDateSpent !== "" && valMember){
         addTimeToTotalSpent(valTimeSpentToAdd, valDateSpent, valMember).then(function () {
             updateDisplay();

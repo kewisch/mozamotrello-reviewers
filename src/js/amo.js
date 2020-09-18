@@ -37,7 +37,6 @@ t.render(async () => {
 
   for (let addon of results) {
     try {
-      console.log(addon);
       let template = document.querySelector("#addon");
       let clone = document.importNode(template.content, true);
 
