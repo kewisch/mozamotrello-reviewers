@@ -17,7 +17,7 @@ members.forEach(member => {
 
 /////utils card/////
 
-function addTimeToTotalSpent(value, date) {
+function addTimeToTotalSpent(value, date, member) {
     //TODO check if all value are set
 
     return new Promise((resolve) => {
@@ -30,7 +30,7 @@ function addTimeToTotalSpent(value, date) {
             data.logs.push({
                 date: date,
                 timeSpent: value,
-                member: $("#members").val()
+                member: member
             });
             t.set('card', 'shared', 'timeTrack', data).then(function () {
                 resolve();
@@ -121,12 +121,25 @@ document.getElementById('closeModal').onclick = function () {
 }
 
 document.getElementById('insertValue').onclick = function () {
+    //check data eligibility --> timeSpentToAdd, dateSpent, members
     var valTimeSpentToAdd = document.getElementById('timeSpentToAdd').value;
     var valDateSpent = document.getElementById('dateSpent').value;
-    addTimeToTotalSpent(valTimeSpentToAdd, valDateSpent).then(function () {
-        updateDisplay();
-        // t.closeModal();
-    });
+    var valMember = $("#members").val();
+    console.log(valTimeSpentToAdd, valDateSpent, valMember);
+    if(valTimeSpentToAdd !== "" && valDateSpent !== "" && valMember){
+        addTimeToTotalSpent(valTimeSpentToAdd, valDateSpent, valMember).then(function () {
+            updateDisplay();
+            // t.closeModal();
+        });
+    }else{
+        $.notify({
+            // options
+            message: 'Please fill up all information before adding' 
+        },{
+            // settings
+            type: 'danger'
+        });
+    }
 }
 
 

@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'regenerator-runtime/runtime';
+import 'bootstrap-notify\bootstrap-notify';
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
@@ -12,7 +13,7 @@ var manageTimeButton = function (t, opts) {
     return t.modal({
       title: 'Time spent',
       url: './timeManage.html',
-      height: 400,
+      height: 600,
       args: {
         members: members
       }
