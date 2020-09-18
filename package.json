@@ -1,11 +1,19 @@
 {
   "name": "AMOTrelloTimeTrack",
-  "version": "0.0.1",
-  "description": "Add time field to cards",
+  "version": "0.1.0",
+  "description": "Add time field and attach review link to card",
   "main": "index.js",
-  "repository": "https://github.com/lafonth/AMOTrelloTimeTrack.git",
-  "author": "Hubert LAFONT",
-  "license": "MIT",
+  "repository": "https://github.com/kewisch/mozamotrello-reviewers.git",
+  "contributors": [{
+      "name": "Hubert LAFONT",
+      "email": "lafonthub@gmail.com"
+    },
+    {
+      "name": "Philipp KEWISCH",
+      "email": "mozilla@kewis.ch"
+    }
+  ],
+  "license": "MPL-2.0",
   "scripts": {
     "build": "parcel build src/html/*.html --no-minify"
   },
@@ -16,6 +24,6 @@
     "bootstrap": "^4.5.0"
   },
   "browserslist": [
-    "last 1 Chrome versions"
+    "last 1 Firefox versions"
   ]
 }

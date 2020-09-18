@@ -130,24 +130,10 @@ document.getElementById('insertValue').onclick = function () {
 }
 
 
-// TODO create utils file
-function escapeHTML(unsafe) {
-    return ('' + unsafe)
-        .replace(/&(?!amp;)/g, "&amp;")
-        .replace(/<(?!lt;)/g, "&lt;")
-        .replace(/>(?!gt;)/g, "&gt;")
-        .replace(/"(?!quot;)/g, "&quot;")
-        .replace(/'(?!#039;)/g, "&#039;");
-};
-
-
 /////render/////
 t.render(function () {
     // NOT TRIGGERED WHEN SET DATA used, I don't know why
     // triggered only when opening
 
     updateDisplay();
-
-    // var logsContainer = document.getElementById('logTimeSpent');
-    // logsContainer.textContent = displayLogs(); //TODO
 })

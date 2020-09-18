@@ -7,16 +7,16 @@ import 'regenerator-runtime/runtime';
 
 const ADDON_LINKS_RE = /https:\/\/(?:reviewers\.)?(addons\.mozilla\.org|addons\.allizom\.org|addons-dev\.allizom\.org|addons\.thunderbird\.net)\/([^/]*)\/(reviewers\/review(|-listed|-unlisted|-content)|admin\/addon\/manage|[^/]*\/addon|developers\/feed)\/([^/#?]*)(\/edit)?/;
 
-var manageTimeButton = function(t, opts) {
+var manageTimeButton = function (t, opts) {
   t.card('members').then(function (members) {
-      return t.modal({
-          title: 'Time spent',
-          url: './timeManage.html',
-          height: 400,
-          args: {
-              members: members
-          }
-      });
+    return t.modal({
+      title: 'Time spent',
+      url: './timeManage.html',
+      height: 400,
+      args: {
+        members: members
+      }
+    });
   });
 }
 
@@ -24,7 +24,7 @@ var manageTimeButton = function(t, opts) {
  * Begin trello powerup initialization.
  */
 TrelloPowerUp.initialize({
-  "attachment-sections": function(t, opts) {
+  "attachment-sections": function (t, opts) {
     let claimed = opts.entries.filter(attachment => attachment.url.match(ADDON_LINKS_RE));
     if (!claimed.length) {
       return [];
@@ -42,7 +42,7 @@ TrelloPowerUp.initialize({
     }];
   },
 
-  "card-from-url": async function(t, opts) {
+  "card-from-url": async function (t, opts) {
     let match = opts.url.match(ADDON_LINKS_RE);
 
     try {
@@ -58,7 +58,7 @@ TrelloPowerUp.initialize({
     }
   },
 
-  "list-actions": function(t, opts) {
+  "list-actions": function (t, opts) {
     return [{
       text: "Open all reviews in tabs",
       callback: async function (t) {
@@ -72,10 +72,10 @@ TrelloPowerUp.initialize({
       }
     }];
   },
-  "format-url": function(t, opts) {
+  "format-url": function (t, opts) {
     throw t.NotHandled();
   },
-  'card-buttons': function(t, opts) {
+  'card-buttons': function (t, opts) {
     return [{
       text: 'Time Track',
       callback: manageTimeButton
