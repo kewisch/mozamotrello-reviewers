@@ -1,5 +1,8 @@
 import 'bootstrap/dist/css/bootstrap.css';
 
+import 'izitoast/dist/css/iziToast.min.css';
+import iziToast from 'izitoast/dist/js/iziToast.min.js'; 
+
 /////init/////
 var t = TrelloPowerUp.iframe();
 
@@ -18,10 +21,7 @@ members.forEach(member => {
 /////utils card/////
 
 function addTimeToTotalSpent(value, date, member) {
-    iziToast.show({
-        title: 'Hey',
-        message: 'What would you like to add?'
-    });
+    iziToast.info({ title: 'Hello', message: 'Welcome!', });
 
     //TODO check if all value are set
 
