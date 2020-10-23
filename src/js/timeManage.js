@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 
-import 'izitoast/dist/css/iziToast.min.css';
-import iziToast from 'izitoast/dist/js/iziToast.min.js'; 
+// import 'izitoast/dist/css/iziToast.min.css';
+// import iziToast from 'izitoast/dist/js/iziToast.min.js'; 
 
 /////init/////
 var t = TrelloPowerUp.iframe();
@@ -21,29 +21,28 @@ members.forEach(member => {
 /////utils card/////
 
 function addTimeToTotalSpent(value, date, member) {
-    iziToast.info({ title: 'Hello', message: 'Welcome!', });
 
     //TODO check if all value are set
 
-    // return new Promise((resolve) => {
-    //     t.get('card', 'shared', 'timeTrack').then(function (data) {
-    //         if (typeof data == 'undefined') {
-    //             data = {
-    //                 logs: new Array
-    //             }
-    //         }
-    //         data.logs.push({
-    //             date: date,
-    //             timeSpent: value,
-    //             member: member
-    //         });
-    //         t.set('card', 'shared', 'timeTrack', data).then(function () {
-    //             resolve();
-    //         });
-    //     }, function (error) {
-    //         console.log('error get timeTrack in addTimeToTotalSpent');
-    //     });
-    // });
+    return new Promise((resolve) => {
+        t.get('card', 'shared', 'timeTrack').then(function (data) {
+            if (typeof data == 'undefined') {
+                data = {
+                    logs: new Array
+                }
+            }
+            data.logs.push({
+                date: date,
+                timeSpent: value,
+                member: member
+            });
+            t.set('card', 'shared', 'timeTrack', data).then(function () {
+                resolve();
+            });
+        }, function (error) {
+            console.log('error get timeTrack in addTimeToTotalSpent');
+        });
+    });
 }
 
 function calculTotalTimeSpent() {
