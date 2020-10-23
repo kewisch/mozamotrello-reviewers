@@ -11,20 +11,16 @@ import iziToast from 'izitoast/dist/js/iziToast.min.js';
 const ADDON_LINKS_RE = /https:\/\/(?:reviewers\.)?(addons\.mozilla\.org|addons\.allizom\.org|addons-dev\.allizom\.org|addons\.thunderbird\.net)\/([^/]*)\/(reviewers\/review(|-listed|-unlisted|-content)|admin\/addon\/manage|[^/]*\/addon|developers\/feed)\/([^/#?]*)(\/edit)?/;
 
 var manageTimeButton = function (t, opts) {
-  iziToast.show({
-    title: 'Hey',
-    message: 'What would you like to add?'
+  t.card('members').then(function (members) {
+    return t.modal({
+      title: 'Time spent',
+      url: './timeManage.html',
+      height: 500,
+      args: {
+        members: members
+      }
+    });
   });
-  // t.card('members').then(function (members) {
-  //   return t.modal({
-  //     title: 'Time spent',
-  //     url: './timeManage.html',
-  //     height: 500,
-  //     args: {
-  //       members: members
-  //     }
-  //   });
-  // });
 }
 
 /**
