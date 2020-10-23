@@ -1,5 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'regenerator-runtime/runtime';
+import 'izitoast';
 // import 'bootstrap-notify\bootstrap-notify';
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -9,16 +10,20 @@ import 'regenerator-runtime/runtime';
 const ADDON_LINKS_RE = /https:\/\/(?:reviewers\.)?(addons\.mozilla\.org|addons\.allizom\.org|addons-dev\.allizom\.org|addons\.thunderbird\.net)\/([^/]*)\/(reviewers\/review(|-listed|-unlisted|-content)|admin\/addon\/manage|[^/]*\/addon|developers\/feed)\/([^/#?]*)(\/edit)?/;
 
 var manageTimeButton = function (t, opts) {
-  t.card('members').then(function (members) {
-    return t.modal({
-      title: 'Time spent',
-      url: './timeManage.html',
-      height: 500,
-      args: {
-        members: members
-      }
-    });
+  iziToast.show({
+    title: 'Hey',
+    message: 'What would you like to add?'
   });
+  // t.card('members').then(function (members) {
+  //   return t.modal({
+  //     title: 'Time spent',
+  //     url: './timeManage.html',
+  //     height: 500,
+  //     args: {
+  //       members: members
+  //     }
+  //   });
+  // });
 }
 
 /**
