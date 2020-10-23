@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'regenerator-runtime/runtime';
-import 'izitoast';
+import {iziToast} from 'izitoast';
 // import 'bootstrap-notify\bootstrap-notify';
 /* This Source Code Form is subject to the terms of the Mozilla Public
  * License, v. 2.0. If a copy of the MPL was not distributed with this
