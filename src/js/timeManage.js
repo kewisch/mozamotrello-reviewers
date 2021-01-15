@@ -1,5 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 
+import DOMPurify from 'dompurify';
+
 // import 'izitoast/dist/css/iziToast.min.css';
 // import iziToast from 'izitoast/dist/js/iziToast.min.js'; 
 
@@ -8,8 +10,8 @@ var t = TrelloPowerUp.iframe();
 
 var members = t.arg("members").members;
 members.forEach(member => {
-    var optionText = member.fullName;
-    var optionValue = member.fullName;
+    var optionText = DOMPurify.sanitize(member.fullName);
+    var optionValue = DOMPurify.sanitize(member.fullName);
     $('#members').append(`<option value="${optionValue}"> 
                                        ${optionText} 
                                   </option>`);
@@ -92,21 +94,32 @@ function displayLogs() {
                 logs: new Array
             }
         }
-        $('#bodyLogTimeSpent').empty();
-        data.logs.forEach(log => {
-            // console.log(log);
-            $('#bodyLogTimeSpent').append(`<tr>
-                    <td>` +
-                log.member +
-                `</td>
-                    <td>` +
-                log.date +
-                `</td>
-                    <td>` +
-                parseInt(log.timeSpent) +
-                `</td>
-                </tr>`);
-        });
+        $('#bodyLogTimeSpent').html(`<tr>
+                                        <td>` +
+                                            log.member +
+                                            `</td>
+                                        <td>` +
+                                            log.date +
+                                            `</td>
+                                        <td>` +
+                                            parseInt(log.timeSpent) +
+                                            `</td>
+                                    </tr>`);
+        // $('#bodyLogTimeSpent').empty();
+        // data.logs.forEach(log => {
+        //     // console.log(log);
+        //     $('#bodyLogTimeSpent').append(`<tr>
+        //             <td>` +
+        //         log.member +
+        //         `</td>
+        //             <td>` +
+        //         log.date +
+        //         `</td>
+        //             <td>` +
+        //         parseInt(log.timeSpent) +
+        //         `</td>
+        //         </tr>`);
+        // });
     }, function (error) {
         console.log('error get timeTrack in displayLogs');
     });
@@ -130,7 +143,7 @@ document.getElementById('insertValue').onclick = function () {
     var valTimeSpentToAdd = document.getElementById('timeSpentToAdd').value;
     var valDateSpent = document.getElementById('dateSpent').value;
     var valMember = $("#members").val();
-    if(valTimeSpentToAdd !== "" && valDateSpent !== "" && valMember){
+    if (valTimeSpentToAdd !== "" && valDateSpent !== "" && valMember) {
         addTimeToTotalSpent(valTimeSpentToAdd, valDateSpent, valMember).then(function () {
             updateDisplay();
             // t.closeModal();
