@@ -92,7 +92,7 @@ function displayLogs() {
         }
         console.log("displayLogs - data get card TimeTrack :", data);
         data.logs.forEach(log => {
-            var logBody = document.createElement("div");
+            var logBody = $(<div></div>);
             logBody.append(
                 `<tr>
                     <td>` +
