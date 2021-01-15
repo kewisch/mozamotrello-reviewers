@@ -90,10 +90,9 @@ function displayLogs() {
             console.log('No log found on this card.');
             return;
         }
-        console.log("displayLogs - data get card TimeTrack :", data);
+        $('#bodyLogTimeSpent').empty();
         data.logs.forEach(log => {
-            var logBody = $(<div></div>);
-            logBody.append(
+            $('#bodyLogTimeSpent').append(
                 `<tr>
                     <td>` +
                         log.member +
@@ -107,7 +106,6 @@ function displayLogs() {
                 </tr>`
             );
         });
-        $('#bodyLogTimeSpent').replaceWith(logBody);
     }, function (error) {
         console.log('error get timeTrack in displayLogs');
     });
