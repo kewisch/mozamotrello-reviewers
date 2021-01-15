@@ -86,22 +86,27 @@ function displayLogs() {
     t.get('card', 'shared', 'timeTrack').then(function (data) {
 
         if (typeof data == 'undefined') {
-            data = {
-                logs: new Array
-            }
+            console.log('No log found on this card.');
+            return;
         }
         console.log("displayLogs - data get card TimeTrack :", data);
-        $('#bodyLogTimeSpent').html(`<tr>
-                                        <td>` +
-            log.member +
-            `</td>
-                                        <td>` +
-            log.date +
-            `</td>
-                                        <td>` +
-            parseInt(log.timeSpent) +
-            `</td>
-                                    </tr>`);
+        data.logs.forEach(log => {
+            var logBody = document.createElement("div");
+            logBody.append(
+                `<tr>
+                    <td>` +
+                        log.member +
+                    `</td>
+                    <td>` +
+                        log.date +
+                    `</td>
+                    <td>` +
+                        parseInt(log.timeSpent) +
+                    `</td>
+                </tr>`
+            );
+        });
+        $('#bodyLogTimeSpent').innerHTML = logBody;
     }, function (error) {
         console.log('error get timeTrack in displayLogs');
     });
@@ -121,9 +126,9 @@ document.getElementById('closeModal').onclick = function () {
 }
 
 document.getElementById('insertValue').onclick = function () {
-    //check data eligibility --> timeSpentToAdd, dateSpent, members
-    var valTimeSpentToAdd = document.getElementById('timeSpentToAdd').value;
-    var valDateSpent = document.getElementById('dateSpent').value;
+    //check data eligibility --> timeSpentToAdd = number, dateSpent = date
+    var valTimeSpentToAdd = DOMPurify.sanitize(document.getElementById('timeSpentToAdd').value);
+    var valDateSpent = DOMPurify.sanitize(document.getElementById('dateSpent').value);
     var valMember = $("#members").val();
     if (valTimeSpentToAdd !== "" && valDateSpent !== "" && valMember) {
         addTimeToTotalSpent(valTimeSpentToAdd, valDateSpent, valMember).then(function () {
