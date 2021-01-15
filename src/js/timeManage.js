@@ -2,9 +2,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 import DOMPurify from 'dompurify';
 
-// import 'izitoast/dist/css/iziToast.min.css';
-// import iziToast from 'izitoast/dist/js/iziToast.min.js'; 
-
 /////init/////
 var t = TrelloPowerUp.iframe();
 
@@ -23,9 +20,6 @@ members.forEach(member => {
 /////utils card/////
 
 function addTimeToTotalSpent(value, date, member) {
-
-    //TODO check if all value are set
-
     return new Promise((resolve) => {
         t.get('card', 'shared', 'timeTrack').then(function (data) {
             if (typeof data == 'undefined') {
@@ -51,26 +45,6 @@ async function calculateTotalTimeSpent() {
     let data = await t.get('card', 'shared', 'timeTrack');
     return data ? data.logs.reduce((acc, log) => acc + parseInt(log.timeSpent, 10)) : 0;
 }
-
-// function calculateTotalTimeSpent() {
-//     return new Promise((resolve) => {
-//         t.get('card', 'shared', 'timeTrack').then(function (data) {
-//             var totalTimeSpent = 0;
-//             if (typeof data !== 'undefined') {
-//                 data.logs.forEach(log => {
-//                     totalTimeSpent += parseInt(log.timeSpent);
-//                 });
-//             } else {
-//                 data = {
-//                     logs: new Array
-//                 }
-//             }
-//             resolve(totalTimeSpent);
-//         }, function (error) {
-//             console.log('error get timeTrack in calculateTotalTimeSpent');
-//         });
-//     });
-// }
 
 function resetData() {
     return new Promise((resolve) => {
@@ -111,21 +85,6 @@ function displayLogs() {
             parseInt(log.timeSpent) +
             `</td>
                                     </tr>`);
-        // $('#bodyLogTimeSpent').empty();
-        // data.logs.forEach(log => {
-        //     // console.log(log);
-        //     $('#bodyLogTimeSpent').append(`<tr>
-        //             <td>` +
-        //         log.member +
-        //         `</td>
-        //             <td>` +
-        //         log.date +
-        //         `</td>
-        //             <td>` +
-        //         parseInt(log.timeSpent) +
-        //         `</td>
-        //         </tr>`);
-        // });
     }, function (error) {
         console.log('error get timeTrack in displayLogs');
     });
@@ -152,18 +111,8 @@ document.getElementById('insertValue').onclick = function () {
     if (valTimeSpentToAdd !== "" && valDateSpent !== "" && valMember) {
         addTimeToTotalSpent(valTimeSpentToAdd, valDateSpent, valMember).then(function () {
             updateDisplay();
-            // t.closeModal();
         });
     }
-    // else{
-    //     $.notify({
-    //         // options
-    //         message: 'Please fill up all information before adding' 
-    //     },{
-    //         // settings
-    //         type: 'danger'
-    //     });
-    // }
 }
 
 
