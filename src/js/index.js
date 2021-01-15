@@ -31,10 +31,12 @@ TrelloPowerUp.initialize({
       return [];
     }
 
+    let icon = require("../images/addon.png");
+
     return [{
       title: "Reviews",
       claimed: claimed,
-      icon: TrelloPowerUp.util.relativeUrl("../src/images/addon.png"),
+      icon: TrelloPowerUp.util.relativeUrl(icon),
       content: {
         type: "iframe",
         url: t.signUrl("./amo.html"),

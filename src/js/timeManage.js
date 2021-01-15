@@ -107,7 +107,7 @@ function displayLogs() {
                 </tr>`
             );
         });
-        $('#bodyLogTimeSpent').innerHTML = logBody;
+        $('#bodyLogTimeSpent').html(logBody);
     }, function (error) {
         console.log('error get timeTrack in displayLogs');
     });
