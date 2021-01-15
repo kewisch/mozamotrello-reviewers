@@ -60,9 +60,7 @@ async function addTimeToTotalSpent(value, date, member) {
 
 async function calculateTotalTimeSpent() {
     let data = await t.get('card', 'shared', 'timeTrack');
-    var total = data.logs.reduce((acc, log) => acc + parseInt(log.timeSpent, 10));
-    console.log("total = ", total);
-    // return data ? data.logs.reduce((acc, log) => acc + parseInt(log.timeSpent, 10)) : 0;
+    return data ? data.logs.reduce((acc, log) => acc + parseInt(log.timeSpent, 10), 0) : 0;
 }
 
 function resetData() {
