@@ -3,6 +3,7 @@
  * file, You can obtain one at http://mozilla.org/MPL/2.0/.
  * Portions Copyright (C) Philipp Kewisch, 2019 */
 
+
 const API_PREFIX = "https://addons.mozilla.org/api/v4/addons/addon/";
 const ADDON_LINKS_RE = /https:\/\/(?:reviewers\.)?(addons\.mozilla\.org|addons\.allizom\.org|addons-dev\.allizom\.org|addons\.thunderbird\.net)\/([^/]*)\/(reviewers\/review(|-listed|-unlisted|-content)|admin\/addon\/manage|[^/]*\/addon|developers\/feed)\/([^/#?]*)(\/edit)?/;
 
@@ -43,7 +44,7 @@ t.render(async () => {
       let name = addon.name ? addon.name["en-US"] || addon.name[addon.default_locale] || "unknown" : addon.slug;
 
       clone.querySelector(".name").textContent = name;
-      clone.querySelector(".img").src = addon.icon_url || "../src/images/addon.png";
+      clone.querySelector(".img").src = addon.icon_url || "../images/addon.png";
       clone.querySelector(".url.listing").setAttribute("href", addon.url);
       clone.querySelector(".url.review").setAttribute("href", addon.review_url || "");
 
