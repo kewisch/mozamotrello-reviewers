@@ -40,74 +40,50 @@ async function addTimeToTotalSpent(value, date, member) {
     }
 }
 
-// function addTimeToTotalSpent(value, date, member) {
-//     return new Promise((resolve) => {
-//         t.get('card', 'shared', 'timeTrack').then(function (data) {
-//             if (typeof data == 'undefined') {
-//                 data = {
-//                     logs: new Array
-//                 }
-//             }
-//             
-//             t.set('card', 'shared', 'timeTrack', data).then(function () {
-//                 resolve();
-//             });
-//         }, function (error) {
-//             console.log('error get timeTrack in addTimeToTotalSpent');
-//         });
-//     });
-// }
-
 async function calculateTotalTimeSpent() {
     let data = await t.get('card', 'shared', 'timeTrack');
     return data ? data.logs.reduce((acc, log) => acc + parseInt(log.timeSpent, 10), 0) : 0;
 }
 
-function resetData() {
+async function resetData() {
     return new Promise((resolve) => {
-        t.set('card', 'shared', 'timeTrack', {
+        await t.set('card', 'shared', 'timeTrack', {
             logs: new Array
-        }).then(() => {
-            updateDisplay();
-            resolve();
         });
+        await updateDisplay();
+        resolve();
     });
 }
 
-function updateDisplay() {
-    calculateTotalTimeSpent().then((time) => {
-        console.log("calculateTotalTimeSpent result : " + time);
-        document.getElementById('totalTimeSpent').textContent = time;
-    });
+async function updateDisplay() {
+    var time = await calculateTotalTimeSpent();
+
+    document.getElementById('totalTimeSpent').textContent = time;
 
     displayLogs();
 }
 
-function displayLogs() {
-    t.get('card', 'shared', 'timeTrack').then(function (data) {
-
-        if (typeof data == 'undefined') {
-            console.log('No log found on this card.');
-            return;
-        }
-        $('#bodyLogTimeSpent').empty();
-        data.logs.forEach(log => {
-            $('#bodyLogTimeSpent').append(
-                `<tr>
+async function displayLogs() {
+    var data = await t.get('card', 'shared', 'timeTrack');
+    if (typeof data == 'undefined') {
+        console.log('No log found on this card.');
+        return;
+    }
+    $('#bodyLogTimeSpent').empty();
+    data.logs.forEach(log => {
+        $('#bodyLogTimeSpent').append(
+            `<tr>
                     <td>` +
-                        log.member +
-                    `</td>
+            log.member +
+            `</td>
                     <td>` +
-                        log.date +
-                    `</td>
+            log.date +
+            `</td>
                     <td>` +
-                        parseInt(log.timeSpent) +
-                    `</td>
+            parseInt(log.timeSpent) +
+            `</td>
                 </tr>`
-            );
-        });
-    }, function (error) {
-        console.log('error get timeTrack in displayLogs');
+        );
     });
 }
 
