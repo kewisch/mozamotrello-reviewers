@@ -19,27 +19,40 @@ members.forEach(member => {
 
 /////utils card/////
 
-function addTimeToTotalSpent(value, date, member) {
-    return new Promise((resolve) => {
-        t.get('card', 'shared', 'timeTrack').then(function (data) {
-            if (typeof data == 'undefined') {
-                data = {
-                    logs: new Array
-                }
-            }
-            data.logs.push({
-                date: date,
-                timeSpent: value,
-                member: member
-            });
-            t.set('card', 'shared', 'timeTrack', data).then(function () {
-                resolve();
-            });
-        }, function (error) {
-            console.log('error get timeTrack in addTimeToTotalSpent');
-        });
-    });
+async function addTimeToTotalSpent(value, date, member) {
+    try{
+        let data = await t.get('card', 'shared', 'timeTrack');
+    }catch(e){
+        console.error("Error - addTimeToTotalSpent - get card data - " + e.message);
+    }
+    try{
+        await t.set('card', 'shared', 'timeTrack', data);
+    }catch(e){
+        console.error("Error - addTimeToTotalSpent - get set data - " + e.message);
+    }
 }
+
+// function addTimeToTotalSpent(value, date, member) {
+//     return new Promise((resolve) => {
+//         t.get('card', 'shared', 'timeTrack').then(function (data) {
+//             if (typeof data == 'undefined') {
+//                 data = {
+//                     logs: new Array
+//                 }
+//             }
+//             data.logs.push({
+//                 date: date,
+//                 timeSpent: value,
+//                 member: member
+//             });
+//             t.set('card', 'shared', 'timeTrack', data).then(function () {
+//                 resolve();
+//             });
+//         }, function (error) {
+//             console.log('error get timeTrack in addTimeToTotalSpent');
+//         });
+//     });
+// }
 
 async function calculateTotalTimeSpent() {
     let data = await t.get('card', 'shared', 'timeTrack');
