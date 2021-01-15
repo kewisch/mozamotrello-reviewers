@@ -22,6 +22,12 @@ members.forEach(member => {
 async function addTimeToTotalSpent(value, date, member) {
     try {
         let data = await t.get('card', 'shared', 'timeTrack');
+        //if no log yet
+        if (typeof data == 'undefined') {
+            var data = {
+                logs: new Array
+            }
+        }
         data.logs.push({
             date: date,
             timeSpent: value,
