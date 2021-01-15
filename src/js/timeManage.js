@@ -46,13 +46,10 @@ async function calculateTotalTimeSpent() {
 }
 
 async function resetData() {
-    return new Promise((resolve) => {
-        await t.set('card', 'shared', 'timeTrack', {
-            logs: new Array
-        });
-        await updateDisplay();
-        resolve();
+    await t.set('card', 'shared', 'timeTrack', {
+        logs: new Array
     });
+    await updateDisplay();
 }
 
 async function updateDisplay() {
