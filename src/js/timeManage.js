@@ -47,25 +47,30 @@ function addTimeToTotalSpent(value, date, member) {
     });
 }
 
-function calculTotalTimeSpent() {
-    return new Promise((resolve) => {
-        t.get('card', 'shared', 'timeTrack').then(function (data) {
-            var totalTimeSpent = 0;
-            if (typeof data !== 'undefined') {
-                data.logs.forEach(log => {
-                    totalTimeSpent += parseInt(log.timeSpent);
-                });
-            } else {
-                data = {
-                    logs: new Array
-                }
-            }
-            resolve(totalTimeSpent);
-        }, function (error) {
-            console.log('error get timeTrack in calculTotalTimeSpent');
-        });
-    });
+async function calculateTotalTimeSpent() {
+    let data = await t.get('card', 'shared', 'timeTrack');
+    return data ? data.logs.reduce((acc, log) => acc + parseInt(log.timeSpent, 10)) : 0;
 }
+
+// function calculateTotalTimeSpent() {
+//     return new Promise((resolve) => {
+//         t.get('card', 'shared', 'timeTrack').then(function (data) {
+//             var totalTimeSpent = 0;
+//             if (typeof data !== 'undefined') {
+//                 data.logs.forEach(log => {
+//                     totalTimeSpent += parseInt(log.timeSpent);
+//                 });
+//             } else {
+//                 data = {
+//                     logs: new Array
+//                 }
+//             }
+//             resolve(totalTimeSpent);
+//         }, function (error) {
+//             console.log('error get timeTrack in calculateTotalTimeSpent');
+//         });
+//     });
+// }
 
 function resetData() {
     return new Promise((resolve) => {
@@ -79,7 +84,7 @@ function resetData() {
 }
 
 function updateDisplay() {
-    calculTotalTimeSpent().then((time) => {
+    calculateTotalTimeSpent().then((time) => {
         document.getElementById('totalTimeSpent').textContent = time;
     });
 
@@ -94,16 +99,17 @@ function displayLogs() {
                 logs: new Array
             }
         }
+        console.log("displayLogs - data get card TimeTrack :", data);
         $('#bodyLogTimeSpent').html(`<tr>
                                         <td>` +
-                                            log.member +
-                                            `</td>
+            log.member +
+            `</td>
                                         <td>` +
-                                            log.date +
-                                            `</td>
+            log.date +
+            `</td>
                                         <td>` +
-                                            parseInt(log.timeSpent) +
-                                            `</td>
+            parseInt(log.timeSpent) +
+            `</td>
                                     </tr>`);
         // $('#bodyLogTimeSpent').empty();
         // data.logs.forEach(log => {
