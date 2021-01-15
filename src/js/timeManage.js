@@ -76,6 +76,7 @@ function resetData() {
 
 function updateDisplay() {
     calculateTotalTimeSpent().then((time) => {
+        console.log("calculateTotalTimeSpent result : " + time);
         document.getElementById('totalTimeSpent').textContent = time;
     });
 
