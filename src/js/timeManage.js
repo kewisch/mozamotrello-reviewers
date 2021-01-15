@@ -22,13 +22,14 @@ members.forEach(member => {
 async function addTimeToTotalSpent(value, date, member) {
     try {
         let data = await t.get('card', 'shared', 'timeTrack');
-        await Promise.all(
+        await Promise((resolve) => {
             data.logs.push({
                 date: date,
                 timeSpent: value,
                 member: member
-            })
-        );
+            });
+            resolve();
+        });
     } catch (e) {
         console.error("Error - addTimeToTotalSpent - get card data - " + e.message);
     }
