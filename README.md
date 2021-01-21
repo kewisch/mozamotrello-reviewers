@@ -8,12 +8,17 @@ This is a Trello PowerUp that:
 ## Usage
 This PowerUp is tailored for the needs of the AMO review team.
 
+BUILD
+yarn global add parcel-bundler
+yarn && yarn build
+
 To install:
 * Head to the [Trello PowerUp Admin](https://trello.com/power-ups/admin)
 * Click on the team you'd like to add this to
 * Give the PowerUp a name and give it the following capabilities:
   * `attachment-sections`
-  * `list-actions`
+  * `card-buttons`
   * `card-from-url`
   * `format-url`
+  * `list-actions`
 * Point the iframe connector URL to where this is hosted

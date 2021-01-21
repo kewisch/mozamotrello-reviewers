@@ -1,0 +1,11 @@
+# ParcelJS cache folder
+dist/
+
+# ParcelJS cache folder
+.cache/
+
+#dependencies
+node_modules/
+
+#yarn log files
+yarn-error.log
