@@ -72,19 +72,20 @@ async function displayLogs() {
     }
     $('#bodyLogTimeSpent').empty();
     data.logs.forEach(log => {
-        $('#bodyLogTimeSpent').append(
-            `<tr>
-                    <td>` +
-            log.member +
-            `</td>
-                    <td>` +
-            log.date +
-            `</td>
-                    <td>` +
-            parseInt(log.timeSpent) +
-            `</td>
-                </tr>`
-        );
+        var tr = document.createElement("tr");
+
+        var tdMember = document.createElement("td");
+        tdMember.textContent = log.member;
+
+        var tdDate = document.createElement("td");
+        tdDate.textContent = log.date;
+
+        var tdTimeSpent = document.createElement("td");
+        tdTimeSpent.textContent = log.timeSpent;
+
+        tr.append(tdMember, tdDate, tdTimeSpent);
+
+        $('#bodyLogTimeSpent').append(tr);
     });
 }
 
